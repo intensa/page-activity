@@ -1,8 +1,6 @@
-class PageActivity {
-
+export default class PageActivity {
 
     constructor(element, setting = {}) {
-
         this.eventFlag = 0;
         let defaultSettings = {
             achieveTime: 60,
@@ -26,10 +24,8 @@ class PageActivity {
             this.loadMultiData();
         }
 
-
         this.bindEvent();
         this.process();
-        console.log(this.eventFlag)
     }
 
     bindEvent() {
@@ -40,7 +36,6 @@ class PageActivity {
     }
 
     process() {
-        console.log(this.eventFlag );
         this.settings.counter.test += 1;
 
         if (this.settings.counter.test === this.settings.testPeriod) {
@@ -51,8 +46,9 @@ class PageActivity {
             this.settings.counter.test = 0;
         }
 
-        let timerHand = setTimeout(() => { this.process() }, this.settings.watchEvery);
-        //console.log(timerHand)
+        let timerHand = setTimeout(() => {
+            this.process()
+        }, this.settings.watchEvery);
 
         if (this.settings.counter.achiev >= this.settings.achieveTime) {
             if (!this.settings.loop) clearTimeout(timerHand);
@@ -83,20 +79,6 @@ class PageActivity {
     }
 
     eventTrigger() {
-        console.log('run event');
         this.eventFlag = 1;
-        //console.log(this.eventFlag);
     }
 }
-
-let el = document;
-let test = new PageActivity(el, {
-    loop: 0,
-    achieveTime: 5,
-    callBack: function () {
-        // тут счеткик
-        console.log('сработал счетчик1');
-    }
-});
-
-console.log(test);
