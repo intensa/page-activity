@@ -87,5 +87,3 @@ export default class PageActivity {
         this.eventFlag = 1;
     }
 }
-let test = new PageActivity(document, {achieveTime: 30});
-console.log(test)
