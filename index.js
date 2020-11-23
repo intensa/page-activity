@@ -1,5 +1,4 @@
 export default class PageActivity {
-
     constructor(element, setting = {}) {
         this.eventFlag = 0;
         let defaultSettings = {
@@ -38,12 +37,18 @@ export default class PageActivity {
     process() {
         this.settings.counter.test += 1;
 
-        if (this.settings.counter.test === this.settings.testPeriod) {
+        if (
+            this.settings.counter.test === this.settings.testPeriod
+        || (this.settings.counter.achiev - this.settings.testPeriod) === this.settings.testPeriod
+        ) {
             if (this.eventFlag) {
                 this.eventFlag = 0;
                 this.settings.counter.achiev += this.settings.testPeriod;
             }
-            this.settings.counter.test = 0;
+
+            if ( this.settings.counter.test === this.settings.testPeriod) {
+                this.settings.counter.test = 0;
+            }
         }
 
         let timerHand = setTimeout(() => {
@@ -82,3 +87,5 @@ export default class PageActivity {
         this.eventFlag = 1;
     }
 }
+let test = new PageActivity(document, {achieveTime: 30});
+console.log(test)
