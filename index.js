@@ -11,7 +11,7 @@ export default class PageActivity {
                 console.log('Achieved!')
             },
             watchEvery: 1,
-            counter: {test: 0, achiev: 0}
+            counter: {test: 0, achieve: 0}
         }
 
         this.settings = Object.assign(defaultSettings, setting);
@@ -39,11 +39,11 @@ export default class PageActivity {
 
         if (
             this.settings.counter.test === this.settings.testPeriod
-        || (this.settings.counter.achiev - this.settings.testPeriod) === this.settings.testPeriod
+            || (this.settings.counter.achieve - this.settings.testPeriod) === this.settings.testPeriod
         ) {
             if (this.eventFlag) {
                 this.eventFlag = 0;
-                this.settings.counter.achiev += this.settings.testPeriod;
+                this.settings.counter.achieve += this.settings.testPeriod;
             }
 
             if ( this.settings.counter.test === this.settings.testPeriod) {
@@ -55,13 +55,13 @@ export default class PageActivity {
             this.process()
         }, this.settings.watchEvery);
 
-        if (this.settings.counter.achiev >= this.settings.achieveTime) {
+        if (this.settings.counter.achieve >= this.settings.achieveTime) {
             if (!this.settings.loop) clearTimeout(timerHand);
-            this.settings.counter.achiev = this.settings.loop ? 0 : -1;
+            this.settings.counter.achieve = this.settings.loop ? 0 : -1;
             this.settings.callBack.call(this);
         }
 
-        if (this.settings.useMultiMode) document.cookie = 'activity=' + this.settings.counter.test + '|' + this.settings.counter.achiev + '; path=/;';
+        if (this.settings.useMultiMode) document.cookie = 'activity=' + this.settings.counter.test + '|' + this.settings.counter.achieve + '; path=/;';
 
 
     }
@@ -71,16 +71,16 @@ export default class PageActivity {
         let cookie = ' ' + document.cookie;
 
         if (cookie.length > 0) {
-            if (cookie.indexOf(search) != -1) {
+            if (cookie.indexOf(search) !== -1) {
                 let offset = cookie.indexOf(search) + search.length;
-                var m = unescape(cookie.substring(offset, cookie.indexOf(";", offset) == -1 ? cookie.length : cookie.indexOf(";", offset))).split('|');
-                this.settings.test = parseInt(m[0]);
-                this.settings.achiev = parseInt(m[1]);
-                return;
+                let m = unescape(cookie.substring(offset, cookie.indexOf(';', offset) === -1 ? cookie.length : cookie.indexOf(';', offset))).split('|');
+                this.settings.test = Number(m[0]);
+                this.settings.achieve = Number(m[1]);
+                return false;
             }
         }
 
-        this.settings.counter.test = this.settings.counter.achiev = 0;
+        this.settings.counter.test = this.settings.counter.achieve = 0;
     }
 
     eventTrigger() {
