@@ -2,9 +2,10 @@
   "name": "page-activity",
   "version": "1.0.2",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/intensa/page-activity/issues"
   },
-  "homepage": "https://github.com/intensa/page-activity#readme"
+  "homepage": "https://github.com/intensa/page-activity#readme",
+  "devDependencies": {
+    "babel-loader": "^8.2.1",
+    "webpack": "^5.6.0",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "@babel/core": "^7.12.8",
+    "@babel/preset-env": "^7.12.7"
+  }
 }
