@@ -4,7 +4,7 @@ export default class PageActivity {
         let defaultSettings = {
             achieveTime: 60,
             loop: 0,
-            eventList: 'touchmove blur focus focusin focusout load resize scroll unload click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup error',
+            eventList: 'touchstart touchmove touchend blur focus focusin focusout load resize scroll unload click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup error',
             testPeriod: 10,
             useMultiMode: true,
             callBack: function (e) {
